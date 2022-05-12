@@ -6,7 +6,7 @@ const LoginPage = () => {
         <div>
             <h1>Login</h1>
             <p>
-                or <Link to='/'>register</Link>
+                or <Link to='/register'>register</Link>
             </p>
         </div>
     );
