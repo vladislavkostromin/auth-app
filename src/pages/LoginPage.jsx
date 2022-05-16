@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import Login from '../components/Login';
+import {Link} from 'react-router-dom'
+import {Login} from 'components/Login'
 
 const LoginPage = () => {
     return (
@@ -11,7 +11,7 @@ const LoginPage = () => {
                 or <Link to='/register'>register</Link>
             </p>
         </div>
-    );
-};
+    )
+}
 
-export default LoginPage;
+export default LoginPage

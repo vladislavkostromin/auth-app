@@ -1,16 +1,25 @@
-import Form from './Form'
-import { useDispatch } from 'react-redux'
-import {setUser} from '../store/slices/userSlice'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import {Form} from './Form'
+import {useHistory} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import {addUser} from 'store/slices/userSlice'
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 
 const Login = () => {
   const dispatch = useDispatch()
+  const {push} = useHistory()
 
   const handleLogin = (email, password) => {
     const auth = getAuth()
     signInWithEmailAndPassword(auth, email, password)
-    .then(console.log)
-    .catch(console.error)
+    .then(({user}) => {
+      dispatch(addUser({
+        email: user.email,
+        id: user.uid,
+        token: user.accessToken
+      }))
+      push('/')
+    })
+    .catch(() => alert('Invalid user!'))
   }
 
   return (
@@ -18,7 +27,7 @@ const Login = () => {
       title='Login'
       handleClick={handleLogin}
     />
-  );
-};
+  )
+}
 
-export default Login;
+export {Login}

@@ -1,16 +1,25 @@
-import Form from './Form'
+import {Form} from './Form'
+import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import {setUser} from '../store/slices/userSlice'
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth"
+import {addUser} from 'store/slices/userSlice'
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
 
 const SignUp = () => {
   const dispatch = useDispatch()
+  const {push} = useHistory()
 
   const handleRegister = (email, password) => {
     const auth = getAuth()
     createUserWithEmailAndPassword(auth, email, password)
-    .then(console.log)
-    .catch(console.error)
+    .then(({user}) => {
+      dispatch(addUser({
+        email: user.email,
+        id: user.uid,
+        token: user.accessToken
+      }))
+      push('/')
+    })
+    .catch(() => alert('Error'))
   }
 
   return (
@@ -18,7 +27,7 @@ const SignUp = () => {
       title='Register'
       handleClick={handleRegister}
     />
-  );
-};
+  )
+}
 
-export default SignUp;
+export {SignUp}

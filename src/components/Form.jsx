@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState} from 'react'
 
 const Form = ({title, handleClick}) => {
   const [email, setEmail] = useState('')
@@ -21,7 +21,7 @@ const Form = ({title, handleClick}) => {
         {title}
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Form;
+export {Form}
