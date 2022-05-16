@@ -1,4 +1,4 @@
-import {Form} from './Form'
+import {Form} from '../Form'
 import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import {addUser} from 'store/slices/userSlice'
